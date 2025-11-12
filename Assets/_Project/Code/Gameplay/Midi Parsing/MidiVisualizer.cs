@@ -48,7 +48,6 @@ public class MidiVisualizer : MonoBehaviour
             {
                 float startSec = ticksSinceLastNote * _secondsPerTick;
                 notes.Add(new Note() { startDelay = startSec, });
-                ticksSinceLastNote = 0;
             }
         }
         return notes;
@@ -57,9 +56,11 @@ public class MidiVisualizer : MonoBehaviour
     public IEnumerator DisplayTrackNotes(MidiTrack midiTrack, int trackIdentifier)
     {
         List<Note> notes = ReadNotesInTrack(midiTrack);
+        float timeElapsed = 0;
         foreach (Note note in notes)
         {
-            yield return new WaitForSeconds(note.startDelay * 0.1f);
+            timeElapsed += Time.deltaTime;
+            yield return new WaitForSeconds(note.startDelay - timeElapsed);
             Debug.Log(trackIdentifier);
         }
     }
