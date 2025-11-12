@@ -177,7 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04f71250833f7454eaf9e01f185f6389, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  midiAsset: {fileID: 102900000, guid: c25e41e9691c7694a8751eb2848643ff, type: 3}
+  midiAsset: {fileID: 102900000, guid: d338b2999d710544ead868295d5e8378, type: 3}
 --- !u!1 &1711403776
 GameObject:
   m_ObjectHideFlags: 0
