@@ -1,28 +1,73 @@
-using System;
-using System.Text;
+#if UNITY_STANDALONE_WIN || UNITY_EDITOR_WIN
 using UnityEngine;
 using UnityEngine.Windows.Speech;
+using TMPro;
 
 public class KeywordScript : MonoBehaviour
 {
-    [SerializeField]
-    private string[] m_Keywords;
+    [SerializeField] string[] keywords;
+    [SerializeField] TMP_Text outputText;
 
-    private KeywordRecognizer m_Recognizer;
+    KeywordRecognizer _recognizer;
+    float _watchdogTimer;
 
     void Start()
     {
-        m_Recognizer = new KeywordRecognizer(m_Keywords);
-        m_Recognizer.OnPhraseRecognized += OnPhraseRecognized;
-        m_Recognizer.Start();
+        _recognizer = new KeywordRecognizer(keywords, ConfidenceLevel.Low);
+        _recognizer.OnPhraseRecognized += OnRecognized;
+        _recognizer.Start();
     }
 
-    private void OnPhraseRecognized(PhraseRecognizedEventArgs args)
+    void Update()
     {
-        StringBuilder builder = new StringBuilder();
-        builder.AppendFormat("{0} ({1}){2}", args.text, args.confidence, Environment.NewLine);
-        builder.AppendFormat("\tTimestamp: {0}{1}", args.phraseStartTime, Environment.NewLine);
-        builder.AppendFormat("\tDuration: {0} seconds{1}", args.phraseDuration.TotalSeconds, Environment.NewLine);
-        Debug.Log(builder.ToString());
+        _watchdogTimer += Time.deltaTime;
+
+        if (_watchdogTimer > 3f)
+        {
+            if (!_recognizer.IsRunning)
+                _recognizer.Start();
+
+            _watchdogTimer = 0f;
+        }
+    }
+
+    void OnDestroy()
+    {
+        _recognizer.OnPhraseRecognized -= OnRecognized;
+        if (_recognizer.IsRunning) _recognizer.Stop();
+        _recognizer.Dispose();
+    }
+
+    void OnRecognized(PhraseRecognizedEventArgs args)
+    {
+        if (outputText) outputText.text = args.text;
+
+        Note[] notes = Object.FindObjectsByType<Note>(FindObjectsSortMode.None);
+
+        bool hitSomething = false;
+        int laneIndex = -1;
+
+        foreach (var n in notes)
+        {
+            if (n.Keyword == args.text)
+            {
+                laneIndex = n.LaneIndex;
+
+                if (n.CanHit)
+                {
+                    Destroy(n.gameObject);
+                    LaneFeedbackManager.Instance.FlashCorrect(laneIndex);
+                    hitSomething = true;
+                }
+            }
+        }
+
+        if (!hitSomething)
+        {
+            for (int i = 0; i < keywords.Length; i++)
+                if (keywords[i] == args.text)
+                    LaneFeedbackManager.Instance.FlashWrong(i);
+        }
     }
 }
+#endif
