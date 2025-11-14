@@ -5,9 +5,6 @@ using UnityEditor;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
-using System.Collections;
-using Melanchall.DryWetMidi.Multimedia;
-using System.Globalization;
 
 /*
     Using DryWetMidi Library plug-in
@@ -19,10 +16,11 @@ using System.Globalization;
 public class MidiParser : MonoBehaviour
 {
     [SerializeField] Object midiAsset;
+    [SerializeField] GameObject _visualizerPrefab;
     private string _path;
 
     private MidiFile _midiFile;
-    private List<TrackChunk> _tracks;
+    private List<TrackData> _tracks = new List<TrackData>();
 
     private short _ticksPerQuarter;
     private float _microSecPerQuarter;
@@ -30,54 +28,66 @@ public class MidiParser : MonoBehaviour
 
     void Start()
     {
-        //Try to read the provided midi file
+        //1. Try to read the provided midi file
         _path = AssetDatabase.GetAssetPath(midiAsset);
         if (Path.GetExtension(_path) != ".mid")
         {
             throw new System.Exception("Invalid file extension (expected .mid)");
         }
 
+        //2. Read Track and Tempo data
         LoadMidiInfo();
 
-        foreach (TrackChunk track in _tracks)
+        //3. Create TrackData *only* for tracks with playable notes.
+        int i = 0;
+        float tempo = (_microSecPerQuarter / _ticksPerQuarter) / MICROSECONDS_PER_SECOND;
+
+        foreach (TrackChunk trackChunk in _midiFile.GetTrackChunks().ToList())
         {
-            StartCoroutine(DisplayTrackNotes(track));
+            if (trackChunk.GetNotes().Count > 0)
+            {
+                _tracks.Add(new TrackData(trackChunk, i, tempo, _ticksPerQuarter));
+                i++;
+            }
+        }
+
+        //4. TESTING ONLY !!
+        SetupVisualizers();
+
+        foreach (TrackData track in _tracks)
+        {
+            StartCoroutine(track.PlayTrack());
         }
     }
-    
+
     private void LoadMidiInfo()
     {
         // Load MIDI file and separate tracks
         _midiFile = MidiFile.Read(_path);
-        _tracks = _midiFile.GetTrackChunks().ToList();
 
-        Debug.Log($"Num of tracks:{_tracks.Count}");
+        Debug.Log($"Num of tracks:{_midiFile.GetTrackChunks().ToList().Count}");
 
         //Read tempo-related information
         _microSecPerQuarter = _midiFile.GetTempoMap().GetTempoChanges().First().Value.MicrosecondsPerQuarterNote;    //assuming that tempo never changes for now
         _ticksPerQuarter = (_midiFile.TimeDivision as TicksPerQuarterNoteTimeDivision).TicksPerQuarterNote;
-
-        Debug.Log($"ms/Quarter: {_microSecPerQuarter} || tick/Quarter {_ticksPerQuarter}");
-
     }
+    #region TESTING WITH VISUALIZER
 
-
-    public IEnumerator DisplayTrackNotes(TrackChunk track)
+    private void SetupVisualizers()
     {
-        if (track.GetNotes().Count == 0)       //if it not a track with notes
-            yield return 0;
+        float trackWidth = gameObject.GetComponent<BoxCollider2D>().size.x / _tracks.Count;
+        float leftBound = gameObject.GetComponent<BoxCollider2D>().bounds.min.x;
 
-        float secondsPerTick = (_microSecPerQuarter / _ticksPerQuarter) / MICROSECONDS_PER_SECOND;
-        Debug.Log($"Seconds per tick: {secondsPerTick}");
-        long currentTime = 0;
-        
-        foreach (var note in track.GetNotes())
+        Vector3 position = new Vector3();
+        for (int i = 0; i < _tracks.Count; i++)
         {
-            var waitTime = note.Time - currentTime;
-            yield return new WaitForSeconds(waitTime * secondsPerTick);
-            
-            Debug.Log($"Played note: {note.NoteName}");
-            currentTime = note.Time;
+            TrackVisualizer visualizer = Instantiate(_visualizerPrefab).GetComponent<TrackVisualizer>();
+            position.x = leftBound + (i * trackWidth) + (trackWidth / 2f);
+
+            visualizer.transform.position = position;
+            visualizer.RegisterTrack(_tracks[i]);
         }
     }
+    
+    #endregion
 }
