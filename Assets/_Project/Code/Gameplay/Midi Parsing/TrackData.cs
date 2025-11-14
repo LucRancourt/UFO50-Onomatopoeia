@@ -15,7 +15,7 @@ public class TrackData
     private TrackChunk _track;
     public float _secondsPerTick, _ticksPerQuarter;      //For tempo
 
-    public UnityEvent<int, string> PlayedNote = new UnityEvent<int, string>();  //track ID and note name
+    public UnityEvent<int, string, float> PlayedNote = new UnityEvent<int, string, float>();  //track ID,  note name, duration of note
 
     /*
         CONSTRUCTOR
@@ -42,7 +42,7 @@ public class TrackData
             yield return new WaitForSeconds(waitTime * _secondsPerTick);
             currentTime = note.Time;
 
-            PlayedNote.Invoke(TrackID, note.NoteName.ToString());
+            PlayedNote.Invoke(TrackID, note.NoteName.ToString(), note.Length * _secondsPerTick);
             Debug.Log($"{TrackID}: Played note: {note.NoteName}");
         }
 

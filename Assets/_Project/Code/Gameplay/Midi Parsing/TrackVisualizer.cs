@@ -16,7 +16,7 @@ public class TrackVisualizer : MonoBehaviour
     public void RegisterTrack(TrackData trackData)
     {
         TrackData = trackData;
-        TrackData.PlayedNote.AddListener((id, noteName) => StartCoroutine(ShowNote(id, noteName)));
+        TrackData.PlayedNote.AddListener((id, noteName, duration) => StartCoroutine(ShowNote(id, noteName, duration)));
     }
 
     void OnDisable()
@@ -24,10 +24,10 @@ public class TrackVisualizer : MonoBehaviour
         TrackData.PlayedNote.RemoveAllListeners();  //for now
     }
 
-    public IEnumerator ShowNote(int trackID, string noteName)       //Do stuff with track here. Or replace this class with the track
+    public IEnumerator ShowNote(int trackID, string noteName, float noteDuration)       //Do stuff with track here. Or replace this class with the track
     {
         _sprite.enabled = true;
-        yield return new WaitForSeconds(TrackData.QuarterNoteLength()/3);
+        yield return new WaitForSeconds(noteDuration/2);
         _sprite.enabled = false;
     }
 }
