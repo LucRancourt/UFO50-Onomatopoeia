@@ -46,19 +46,19 @@ public class MidiParser : MonoBehaviour
         {
             if (trackChunk.GetNotes().Count > 0)
             {
-                SongManager.Instance.Tracks.Add(new TrackData(trackChunk, i, tempo, _ticksPerQuarter));
-                //_tracks.Add(new TrackData(trackChunk, i, tempo, _ticksPerQuarter));
+                //SongManager.Instance.Tracks.Add(new TrackData(trackChunk, i, tempo, _ticksPerQuarter));
+                _tracks.Add(new TrackData(trackChunk, i, tempo, _ticksPerQuarter));
                 i++;
             }
         }
 
         //4. TESTING ONLY !!
-        // SetupVisualizers();
+        SetupVisualizers();
 
-        // foreach (TrackData track in _tracks)
-        // {
-        //     StartCoroutine(track.PlayTrack());
-        // }
+        foreach (TrackData track in _tracks)
+        {
+            StartCoroutine(track.PlayTrack());
+        }
     }
 
     private void LoadMidiInfo()
