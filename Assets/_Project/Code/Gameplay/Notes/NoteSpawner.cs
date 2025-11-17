@@ -89,4 +89,10 @@ public class NoteSpawner : MonoBehaviour
         _keywordListener.RemoveNote(note);
         Destroy(note.gameObject);
     }
+
+    public float GetDelayToTopBar()     //calculates the time it will take for spawned notes to reach the top bar
+    {
+        float distance = Mathf.Abs(spawnY - hitZoneTop.anchoredPosition.y);
+        return distance / moveSpeed;
+    }
 }

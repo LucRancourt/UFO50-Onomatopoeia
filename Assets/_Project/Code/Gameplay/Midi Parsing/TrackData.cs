@@ -1,6 +1,7 @@
 using Melanchall.DryWetMidi.Core;
 using Melanchall.DryWetMidi.Interaction;
 using System.Collections;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -43,7 +44,7 @@ public class TrackData
             currentTime = note.Time;
 
             PlayedNote.Invoke(TrackID, note.NoteName.ToString(), note.Length * _secondsPerTick);
-            Debug.Log($"{TrackID}: Played note: {note.NoteName}");
+            //Debug.Log($"{TrackID}: Played note: {note.NoteName}");
         }
 
         IsPlaying = false;
@@ -52,5 +53,9 @@ public class TrackData
     public float QuarterNoteLength()
     {
         return _secondsPerTick * _ticksPerQuarter;
+    }
+
+    public float GetWaitToFirstNote(){
+        return (_track.GetNotes().First().Time * _secondsPerTick) / SongManager.Instance.TempoMultiplier;
     }
 }

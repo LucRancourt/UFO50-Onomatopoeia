@@ -41,6 +41,7 @@ public class MidiParser : MonoBehaviour
         //3. Create TrackData *only* for tracks with playable notes.
         int i = 0;
         float tempo = (_microSecPerQuarter / _ticksPerQuarter) / MICROSECONDS_PER_SECOND;
+        SongManager.Instance.Tracks.Clear();    //clear any previous tracks
 
         foreach (TrackChunk trackChunk in _midiFile.GetTrackChunks().ToList())
         {
