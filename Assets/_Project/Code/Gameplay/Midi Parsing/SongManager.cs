@@ -5,6 +5,7 @@ using UnityEngine.Rendering;
 public class SongManager : Singleton<SongManager>
 {
     public List<TrackData> Tracks = new List<TrackData>();
+    public float TempoMultiplier = 1f;
 
     public void StartSong()
     {

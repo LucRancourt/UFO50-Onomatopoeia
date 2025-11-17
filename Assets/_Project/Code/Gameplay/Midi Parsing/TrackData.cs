@@ -39,7 +39,7 @@ public class TrackData
         foreach (var note in _track.GetNotes())
         {
             var waitTime = note.Time - currentTime;
-            yield return new WaitForSeconds(waitTime * _secondsPerTick);
+            yield return new WaitForSeconds((waitTime * _secondsPerTick) / SongManager.Instance.TempoMultiplier);
             currentTime = note.Time;
 
             PlayedNote.Invoke(TrackID, note.NoteName.ToString(), note.Length * _secondsPerTick);
