@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04f71250833f7454eaf9e01f185f6389, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  midiAsset: {fileID: 102900000, guid: e9f034a89a8b6f24d8df213f6fde376b, type: 3}
+  midiAsset: {fileID: 102900000, guid: 145bc1c80bf2ac0428800d2c9e0e4a20, type: 3}
   _visualizerPrefab: {fileID: 6572757299074054312, guid: db199bd4bb3738f459b6dd7898f45873, type: 3}
 --- !u!61 &1158469680
 BoxCollider2D:
@@ -220,7 +220,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1158469675}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 937c6d5bcb642f3459e7b8591671ce8f, type: 3}
   m_Name: 

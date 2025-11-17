@@ -27,7 +27,7 @@ public class TrackVisualizer : MonoBehaviour
     public IEnumerator ShowNote(int trackID, string noteName, float noteDuration)       //Do stuff with track here. Or replace this class with the track
     {
         _sprite.enabled = true;
-        yield return new WaitForSeconds(noteDuration/2);
+        yield return new WaitForSeconds(noteDuration * 0.8f);
         _sprite.enabled = false;
     }
 }
