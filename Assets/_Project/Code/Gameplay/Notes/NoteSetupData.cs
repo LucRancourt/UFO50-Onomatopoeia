@@ -5,4 +5,5 @@ public struct NoteSetupData
     public float Speed;
     public UnityEngine.Transform HitTop;
     public UnityEngine.Transform HitBottom;
+    public NoteSpawner Spawner;
 }

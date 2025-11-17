@@ -7,6 +7,8 @@ public class Note : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] RectTransform hitZoneTop;
     [SerializeField] RectTransform hitZoneBottom;
+    private NoteSpawner _spawner;
+    
 
     RectTransform _rt;
     bool _canHit;
@@ -29,8 +31,8 @@ public class Note : MonoBehaviour
 
         _canHit = y <= topY && y >= bottomY;
 
-        if (y < bottomY - 300f)
-            Destroy(gameObject);
+        if (y < bottomY)
+            _spawner.MissedNote(this);
     }
 
     public void Setup(NoteSetupData data)
@@ -40,5 +42,6 @@ public class Note : MonoBehaviour
         speed = data.Speed;
         hitZoneTop = (RectTransform)data.HitTop;
         hitZoneBottom = (RectTransform)data.HitBottom;
+        _spawner = data.Spawner;
     }
 }

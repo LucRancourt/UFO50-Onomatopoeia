@@ -1344,7 +1344,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1161536283}
-  - component: {fileID: 1161536281}
   - component: {fileID: 1161536280}
   - component: {fileID: 1161536279}
   - component: {fileID: 1161536287}
@@ -1409,23 +1408,6 @@ MonoBehaviour:
   wrongColor: {r: 1, g: 0, b: 0, a: 1}
   normalColor: {r: 1, g: 1, b: 1, a: 1}
   flashDuration: 0.2
---- !u!114 &1161536281
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1161536278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 860571a19f90c624a85031df7ad173f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  keywords:
-  - Bang
-  - Pow
-  - Clap
-  - Tiss
 --- !u!4 &1161536283
 Transform:
   m_ObjectHideFlags: 0
