@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 public class KeywordGameplayListener : IDisposable
 {
-    private DictationRecognizer _DictationRecognizer;
+    private DictationRecognizer _dictationRecognizer;
 
     private List<string> _possibleNotes;
     private List<Note> _upcomingNotes = new List<Note>();
@@ -18,13 +18,16 @@ public class KeywordGameplayListener : IDisposable
     { 
         _possibleNotes = notes;
 
-        _DictationRecognizer = new DictationRecognizer();
-        _DictationRecognizer.AutoSilenceTimeoutSeconds = 100000.0f;
-        _DictationRecognizer.InitialSilenceTimeoutSeconds = 100000.0f;
+        _dictationRecognizer = new DictationRecognizer();
+        _dictationRecognizer.AutoSilenceTimeoutSeconds = 100000.0f;
+        _dictationRecognizer.InitialSilenceTimeoutSeconds = 100000.0f;
 
-        _DictationRecognizer.DictationHypothesis += CheckNote;
+        _dictationRecognizer.DictationHypothesis += CheckNote;
 
-        _DictationRecognizer.Start();
+        _dictationRecognizer.DictationComplete += (completionCause) => { ResetDictation(); };
+        _dictationRecognizer.DictationError += (error, hresult) => { ResetDictation(); };
+
+        _dictationRecognizer.Start();
     }
 
     private void CheckNote(string hypoText)
@@ -47,6 +50,14 @@ public class KeywordGameplayListener : IDisposable
                 OnFalseHit?.Invoke(word);
             }
         }
+    }
+
+    private void ResetDictation()
+    {
+        if (_dictationRecognizer.Status == SpeechSystemStatus.Running)
+            _dictationRecognizer.Stop();
+
+        _dictationRecognizer.Start();
     }
 
     public void AddNextNote(Note newNote) { _upcomingNotes.Add(newNote); }
@@ -78,13 +89,13 @@ public class KeywordGameplayListener : IDisposable
 
     public void Dispose()
     {
-        if (_DictationRecognizer == null) return;
+        if (_dictationRecognizer == null) return;
 
-        _DictationRecognizer.DictationHypothesis -= CheckNote;
+        _dictationRecognizer.DictationHypothesis -= CheckNote;
 
-        _DictationRecognizer.Stop();
+        _dictationRecognizer.Stop();
 
-        _DictationRecognizer.Dispose();
-        _DictationRecognizer = null;
+        _dictationRecognizer.Dispose();
+        _dictationRecognizer = null;
     }
 }
