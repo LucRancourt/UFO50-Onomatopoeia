@@ -28,7 +28,7 @@ public class MainMenu : Menu<MainMenu>
 
     private void StartGame()
     {
-        ServiceLocator.Get<SceneService>().LoadScene("Sandbox");
+        ServiceLocator.Get<SceneService>().LoadScene("Start Timing Test");
     }
 
     private void OpenSettings()

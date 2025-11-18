@@ -16,7 +16,7 @@ using System.Linq;
 public class MidiParser : MonoBehaviour
 {
     [SerializeField] Object midiAsset;
-    [SerializeField] GameObject _visualizerPrefab;
+    [SerializeField] string _midiFileName;
     private string _path;
 
     private MidiFile _midiFile;
@@ -28,12 +28,8 @@ public class MidiParser : MonoBehaviour
 
     void Start()
     {
-        //1. Try to read the provided midi file
-        _path = AssetDatabase.GetAssetPath(midiAsset);
-        if (Path.GetExtension(_path) != ".mid")
-        {
-            throw new System.Exception("Invalid file extension (expected .mid)");
-        }
+        //1. Get Path to midi file
+        ReadMidiFile();
 
         //2. Read Track and Tempo data
         LoadMidiInfo();
@@ -52,20 +48,20 @@ public class MidiParser : MonoBehaviour
                 i++;
             }
         }
+    }
 
-        //4. TESTING ONLY !!
-        // SetupVisualizers();
+    private void ReadMidiFile()
+    {
+        //_path = Path.Combine(Application.streamingAssetsPath, midiAsset.name + ".mid");
+        //_midiFile = MidiFile.Read(_path);
+        TextAsset midiTextAsset = Resources.Load<TextAsset>(_midiFileName);
+        _midiFile = MidiFile.Read(new MemoryStream(midiTextAsset.bytes));
 
-        // foreach (TrackData track in _tracks)
-        // {
-        //     StartCoroutine(track.PlayTrack());
-        // }
     }
 
     private void LoadMidiInfo()
     {
         // Load MIDI file and separate tracks
-        _midiFile = MidiFile.Read(_path);
 
         Debug.Log($"Num of tracks:{_midiFile.GetTrackChunks().ToList().Count}");
 
@@ -75,21 +71,21 @@ public class MidiParser : MonoBehaviour
     }
     #region TESTING WITH VISUALIZER
 
-    private void SetupVisualizers()
-    {
-        float trackWidth = gameObject.GetComponent<BoxCollider2D>().size.x / _tracks.Count;
-        float leftBound = gameObject.GetComponent<BoxCollider2D>().bounds.min.x;
+    // private void SetupVisualizers()
+    // {
+    //     float trackWidth = gameObject.GetComponent<BoxCollider2D>().size.x / _tracks.Count;
+    //     float leftBound = gameObject.GetComponent<BoxCollider2D>().bounds.min.x;
 
-        Vector3 position = new Vector3();
-        for (int i = 0; i < _tracks.Count; i++)
-        {
-            TrackVisualizer visualizer = Instantiate(_visualizerPrefab).GetComponent<TrackVisualizer>();
-            position.x = leftBound + (i * trackWidth) + (trackWidth / 2f);
+    //     Vector3 position = new Vector3();
+    //     for (int i = 0; i < _tracks.Count; i++)
+    //     {
+    //         TrackVisualizer visualizer = Instantiate(_visualizerPrefab).GetComponent<TrackVisualizer>();
+    //         position.x = leftBound + (i * trackWidth) + (trackWidth / 2f);
 
-            visualizer.transform.position = position;
-            visualizer.RegisterTrack(_tracks[i]);
-        }
-    }
+    //         visualizer.transform.position = position;
+    //         visualizer.RegisterTrack(_tracks[i]);
+    //     }
+    // }
     
     #endregion
 }
