@@ -15,7 +15,6 @@ using System.Linq;
 
 public class MidiParser : MonoBehaviour
 {
-    [SerializeField] Object midiAsset;
     [SerializeField] string _midiFileName;
     private string _path;
 
@@ -52,10 +51,10 @@ public class MidiParser : MonoBehaviour
 
     private void ReadMidiFile()
     {
-        //_path = Path.Combine(Application.streamingAssetsPath, midiAsset.name + ".mid");
-        //_midiFile = MidiFile.Read(_path);
-        TextAsset midiTextAsset = Resources.Load<TextAsset>(_midiFileName);
-        _midiFile = MidiFile.Read(new MemoryStream(midiTextAsset.bytes));
+        _path = Path.Combine(Application.streamingAssetsPath, _midiFileName + ".mid");      //both of these work, but its easier this way (so we dont have to create a separate .byte file for each midi in resources)
+        _midiFile = MidiFile.Read(_path);
+        ///TextAsset midiTextAsset = Resources.Load<TextAsset>(_midiFileName);
+        //_midiFile = MidiFile.Read(new MemoryStream(midiTextAsset.bytes));
 
     }
 
