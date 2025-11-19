@@ -36,7 +36,7 @@ public class MainMenuTest : Menu<MainMenu>
         quitButton.onClick.AddListener(QuitGame);
         howToPlayButton.onClick.AddListener(OpenHowToPlay);
 
-        level1Button.onClick.AddListener(() => LoadLevel("Start Timing Test"));
+        level1Button.onClick.AddListener(() => LoadLevel("JingleBells"));
         level2Button.onClick.AddListener(() => LoadLevel("CarelessWhisper"));
         level3Button.onClick.AddListener(() => LoadLevel("MiiChannel"));
     }
