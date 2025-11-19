@@ -75,6 +75,8 @@ public class NoteSpawner : MonoBehaviour
     private void HitNote(Note note)
     {
         LaneFeedbackManager.Instance.FlashCorrect(note.LaneIndex);
+        
+        note.GetComponent<NoteVisuals>().ShowScorePopup();
 
         MissedNote(note);
     }

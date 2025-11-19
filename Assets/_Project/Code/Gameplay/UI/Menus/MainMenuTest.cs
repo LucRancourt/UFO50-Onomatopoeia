@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Windows.Speech;
+
 using _Project.Code.Core.ServiceLocator;
 
 public class MainMenuTest : Menu<MainMenu>
@@ -19,6 +21,9 @@ public class MainMenuTest : Menu<MainMenu>
     [SerializeField] private Button level2Button;
     [SerializeField] private Button level3Button;
 
+    private bool isDictationEnabled = false;
+    private DictationRecognizer dictationTest;
+
     protected override void Awake()
     {
         base.Awake();
@@ -26,26 +31,49 @@ public class MainMenuTest : Menu<MainMenu>
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
 
-        playButton.onClick.AddListener(OpenLevelSelect);
+        playButton.onClick.AddListener(StartDictationTest);
         settingsButton.onClick.AddListener(OpenSettings);
         quitButton.onClick.AddListener(QuitGame);
         howToPlayButton.onClick.AddListener(OpenHowToPlay);
 
-        level1Button.onClick.AddListener(() => LoadLevel("GameSceneTest1"));
-        level2Button.onClick.AddListener(() => LoadLevel("GameSceneTest2"));
-        level3Button.onClick.AddListener(() => LoadLevel("GameSceneTest3"));
+        level1Button.onClick.AddListener(() => LoadLevel("Start Timing Test"));
+        level2Button.onClick.AddListener(() => LoadLevel("CarelessWhisper"));
+        level3Button.onClick.AddListener(() => LoadLevel("MiiChannel"));
     }
 
-    private void OpenLevelSelect()
+    private void StartDictationTest()
     {
-        howToPlayPanel.SetActive(false);
+        dictationTest = new DictationRecognizer();
+        dictationTest.DictationError += (string error, int hresult) => { OnDictationError(); };
+
+        isDictationEnabled = true;
+        dictationTest.Start();
+
+        Invoke(nameof(OpenLevelSelectAfterTest), 0.3f);
+    }
+
+    private void OnDictationError()
+    {
+        isDictationEnabled = false;
+        DictationRequestMenu.Instance.Open();
+    }
+
+    private void OpenLevelSelectAfterTest()
+    {
+        if (!isDictationEnabled)
+            return;
+
+        dictationTest.Stop();
+        dictationTest.Dispose();
+
         levelSelectPanel.SetActive(true);
+        howToPlayPanel.SetActive(false);
     }
 
     private void OpenHowToPlay()
     {
-        levelSelectPanel.SetActive(false);
         howToPlayPanel.SetActive(true);
+        levelSelectPanel.SetActive(false);
     }
 
     private void LoadLevel(string sceneName)
