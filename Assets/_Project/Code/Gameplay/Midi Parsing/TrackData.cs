@@ -16,7 +16,8 @@ public class TrackData
     private TrackChunk _track;
     public float _secondsPerTick, _ticksPerQuarter;      //For tempo
 
-    public UnityEvent<int, string, float> PlayedNote = new UnityEvent<int, string, float>();  //track ID,  note name, duration of note
+    public UnityEvent<int, string, float> PlayedNote = new UnityEvent<int, string, float>();    //track ID,  note name, duration of note
+    public UnityEvent<float> FinishedTrack = new UnityEvent<float>();                           //float: duration of last note
 
     /*
         CONSTRUCTOR
@@ -37,15 +38,18 @@ public class TrackData
         IsPlaying = true;
 
         long currentTime = 0;
+        float lastNoteLength = 0;
         foreach (var note in _track.GetNotes())
         {
             var waitTime = note.Time - currentTime;
             yield return new WaitForSeconds((waitTime * _secondsPerTick) / SongManager.Instance.TempoMultiplier);
             currentTime = note.Time;
-
-            PlayedNote.Invoke(TrackID, note.NoteName.ToString(), note.Length * _secondsPerTick);
-            //Debug.Log($"{TrackID}: Played note: {note.NoteName}");
+            
+            lastNoteLength = note.Length * _secondsPerTick;
+            PlayedNote.Invoke(TrackID, note.NoteName.ToString(), lastNoteLength);
         }
+
+        FinishedTrack.Invoke(lastNoteLength);
 
         IsPlaying = false;
     }

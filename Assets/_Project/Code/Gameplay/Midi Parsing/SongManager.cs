@@ -1,16 +1,24 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using _Project.Code.Core.General;
+using UnityEngine;
 
 public class SongManager : Singleton<SongManager>
 {
     public List<TrackData> Tracks = new List<TrackData>();
     public float TempoMultiplier = 1f;
+    
+    [SerializeField] float _songEndTimeBuffer = 2f;
+    private int _finishedTracks;
 
     public void StartSong()
     {
+        _finishedTracks = 0;
         foreach(TrackData track in Tracks)
         {
+            track.FinishedTrack.AddListener(CheckForSongCompletion);
             StartCoroutine(track.PlayTrack());
         }
     }
@@ -29,5 +37,21 @@ public class SongManager : Singleton<SongManager>
         }
 
         return timing;
+    }
+
+    private void CheckForSongCompletion(float lastNoteDuration)
+    {
+        _finishedTracks++;
+        
+        if(_finishedTracks == 4)
+            StartCoroutine(PauseThenResults(lastNoteDuration));
+
+    }
+
+    private IEnumerator PauseThenResults(float lastNoteDuration)
+    {
+        yield return new WaitForSeconds(FindFirstObjectByType<NoteSpawner>().GetDelayToTopBar() + lastNoteDuration + _songEndTimeBuffer);
+        //GO TO RESULTS SCREEN HERE
+        UnityEngine.Debug.Log($"song ended: {FindFirstObjectByType<NoteSpawner>().GetDelayToTopBar() + lastNoteDuration + _songEndTimeBuffer}");
     }
 }
