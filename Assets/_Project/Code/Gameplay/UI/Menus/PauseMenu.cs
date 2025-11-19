@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 using _Project.Code.Core.ServiceLocator;
 using _Project.Code.Core.Events;
@@ -15,6 +16,8 @@ public class PauseMenu : Menu<PauseMenu>
     [SerializeField] private Button resumeGame;
     [SerializeField] private Button openSettingsMenu;
     [SerializeField] private Button returnToMainMenu;
+
+    private AudioSource _musicSource;
 
 
     // Functions
@@ -34,6 +37,30 @@ public class PauseMenu : Menu<PauseMenu>
         EventBus.Instance.Subscribe<PauseInputEvent>(this, OnPauseInputEvent);
     }
 
+    private void OnEnable()
+    {
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+
+    private void OnDisable()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        _musicSource = FindMusicSource();
+    }
+
+    private AudioSource FindMusicSource()
+    {
+        StartMusic sm = FindFirstObjectByType<StartMusic>();
+        if (sm != null)
+            return sm.audioSource;
+
+        return null;
+    }
+
     private void OnPauseInputEvent(PauseInputEvent evt)
     {
         if (Time.timeScale == 0.0f)
@@ -45,6 +72,9 @@ public class PauseMenu : Menu<PauseMenu>
     private void PauseGame()
     {
         Time.timeScale = 0.0f;
+
+        if (_musicSource != null)
+            _musicSource.Pause();
 
         pauseMenu.SetActive(true);
     }
@@ -59,6 +89,9 @@ public class PauseMenu : Menu<PauseMenu>
         pauseMenu.SetActive(false);
 
         Time.timeScale = 1.0f;
+
+        if (_musicSource != null)
+            _musicSource.UnPause();
     }
 
     private void OpenSettingsMenu()

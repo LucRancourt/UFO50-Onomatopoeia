@@ -43,5 +43,7 @@ public class Note : MonoBehaviour
         hitZoneTop = (RectTransform)data.HitTop;
         hitZoneBottom = (RectTransform)data.HitBottom;
         _spawner = data.Spawner;
+        
+        GetComponent<NoteVisuals>().Init(keyword);
     }
 }
