@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Windows.Speech;
 
 using _Project.Code.Core.ServiceLocator;
 
@@ -12,8 +11,7 @@ public class MainMenu : Menu<MainMenu>
     [SerializeField] private Button settingsButton;
     [SerializeField] private Button quitButton;
 
-    private bool isDictationEnabled = false;
-
+    private DictationStatusChecker checker;
 
     // Functions
     protected override void Awake()
@@ -30,26 +28,30 @@ public class MainMenu : Menu<MainMenu>
 
     private void StartGame()
     {
-        DictationRecognizer testDictation = new DictationRecognizer();
-        testDictation.DictationError += (string error, int hresult) => { OnDictationError(); } ;
+        checker = new DictationStatusChecker();
+        checker.Initialize();
 
-        isDictationEnabled = true;
-
-        testDictation.Start();
-
-        Invoke(nameof(OpenLevelSelect), 0.2f);
+        Invoke(nameof(Check), 1.0f);
     }
 
-    private void OnDictationError()
+    private void Check()
     {
-        isDictationEnabled = false;
-        DictationRequestMenu.Instance.Open();
+        bool success = checker.WasSuccessful;
+
+        checker.Destroy();
+        checker = null;
+
+        if (!success)
+        {
+            DictationRequestMenu.Instance.Open();
+            return;
+        }
+
+        Invoke(nameof(OpenLevelSelect), 1.0f);
     }
 
     private void OpenLevelSelect()
     {
-        if (!isDictationEnabled) return;
-
         ServiceLocator.Get<SceneService>().LoadScene("Start Timing Test");
     }
 
