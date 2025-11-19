@@ -11,6 +11,7 @@ public class SongManager : Singleton<SongManager>
     public float TempoMultiplier = 1f;
     
     [SerializeField] float _songEndTimeBuffer = 2f;
+    [SerializeField] ResultsPageMenu _resultsPage;
     private int _finishedTracks;
 
     public void StartSong()
@@ -51,7 +52,7 @@ public class SongManager : Singleton<SongManager>
     private IEnumerator PauseThenResults(float lastNoteDuration)
     {
         yield return new WaitForSeconds(FindFirstObjectByType<NoteSpawner>().GetDelayToTopBar() + lastNoteDuration + _songEndTimeBuffer);
-        //GO TO RESULTS SCREEN HERE
-        UnityEngine.Debug.Log($"song ended: {FindFirstObjectByType<NoteSpawner>().GetDelayToTopBar() + lastNoteDuration + _songEndTimeBuffer}");
+        _resultsPage.DisplayResults();
+        //UnityEngine.Debug.Log($"song ended: {FindFirstObjectByType<NoteSpawner>().GetDelayToTopBar() + lastNoteDuration + _songEndTimeBuffer}");
     }
 }

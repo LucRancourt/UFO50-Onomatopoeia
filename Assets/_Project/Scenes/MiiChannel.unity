@@ -1703,6 +1703,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TempoMultiplier: 0.95
   _songEndTimeBuffer: 2
+  _resultsPage: {fileID: 1450131019}
 --- !u!114 &1161536287
 MonoBehaviour:
   m_ObjectHideFlags: 0
