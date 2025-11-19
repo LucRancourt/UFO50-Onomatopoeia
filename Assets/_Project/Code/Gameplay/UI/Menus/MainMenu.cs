@@ -1,8 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Windows.Speech;
 
 using _Project.Code.Core.ServiceLocator;
-
 
 public class MainMenu : Menu<MainMenu>
 {
@@ -11,6 +11,8 @@ public class MainMenu : Menu<MainMenu>
     [SerializeField] private Button playButton;
     [SerializeField] private Button settingsButton;
     [SerializeField] private Button quitButton;
+
+    private bool isDictationEnabled = false;
 
 
     // Functions
@@ -28,6 +30,26 @@ public class MainMenu : Menu<MainMenu>
 
     private void StartGame()
     {
+        DictationRecognizer testDictation = new DictationRecognizer();
+        testDictation.DictationError += (string error, int hresult) => { OnDictationError(); } ;
+
+        isDictationEnabled = true;
+
+        testDictation.Start();
+
+        Invoke(nameof(OpenLevelSelect), 0.2f);
+    }
+
+    private void OnDictationError()
+    {
+        isDictationEnabled = false;
+        DictationRequestMenu.Instance.Open();
+    }
+
+    private void OpenLevelSelect()
+    {
+        if (!isDictationEnabled) return;
+
         ServiceLocator.Get<SceneService>().LoadScene("Start Timing Test");
     }
 
