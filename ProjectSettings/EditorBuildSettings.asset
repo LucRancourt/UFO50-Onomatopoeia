@@ -17,6 +17,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_Project/Scenes/Start Timing Test.unity
     guid: 358ed2a613b2c69458d8a97f36a0f4db
+  - enabled: 1
+    path: Assets/_Project/Scenes/TestScenes/PersistentTest.unity
+    guid: 7c3cb584a3ac5d348a524cda8e60672a
+  - enabled: 1
+    path: Assets/_Project/Scenes/TestScenes/MainMenuTest.unity
+    guid: 2cb910ead9947004a8810f2e9f399c34
+  - enabled: 1
+    path: Assets/_Project/Scenes/TestScenes/GameSceneTest1.unity
+    guid: 44275b8226eaf8d4fac41e26d250d83e
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
