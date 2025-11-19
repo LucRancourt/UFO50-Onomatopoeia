@@ -725,6 +725,7 @@ GameObject:
   - component: {fileID: 538496277}
   - component: {fileID: 538496276}
   - component: {fileID: 538496275}
+  - component: {fileID: 538496278}
   m_Layer: 5
   m_Name: Start
   m_TagString: Untagged
@@ -808,6 +809,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 538496278}
+        m_TargetAssemblyTypeName: StartButton, Assembly-CSharp
+        m_MethodName: OnClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &538496276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -846,6 +859,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 538496273}
   m_CullTransparentMesh: 1
+--- !u!114 &538496278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 538496273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49fe64ddabf43684180c01810471eafe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 538496275}
 --- !u!1 &550567225
 GameObject:
   m_ObjectHideFlags: 0
@@ -1592,7 +1618,7 @@ MonoBehaviour:
   - Clap
   - Tick
   spawnInterval: 5
-  moveSpeed: 150
+  moveSpeed: 175
   hitZoneTop: {fileID: 550567226}
   hitZoneBottom: {fileID: 1562883649}
   canvasTransform: {fileID: 1449746344}
@@ -1675,7 +1701,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f8c706b2883544439ccf69deed22b04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TempoMultiplier: 0.75
+  TempoMultiplier: 0.95
+  _songEndTimeBuffer: 2
 --- !u!114 &1161536287
 MonoBehaviour:
   m_ObjectHideFlags: 0

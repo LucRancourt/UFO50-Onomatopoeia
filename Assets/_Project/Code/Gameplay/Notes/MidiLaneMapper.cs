@@ -26,7 +26,7 @@ public class MidiLaneMapper : MonoBehaviour
 
     void OnMidiNote(int trackID, string noteName, float duration)
     {
-        Debug.Log("MIDI EVENT ARRIVED: track = " + trackID);
+        //Debug.Log("MIDI EVENT ARRIVED: track = " + trackID);
         
         if (trackID < 0 || trackID >= trackToLane.Length) return;
 
