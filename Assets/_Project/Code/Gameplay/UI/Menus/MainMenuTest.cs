@@ -21,8 +21,8 @@ public class MainMenuTest : Menu<MainMenu>
     [SerializeField] private Button level2Button;
     [SerializeField] private Button level3Button;
 
-    private bool isDictationEnabled = false;
-    private DictationRecognizer dictationTest;
+    private DictationStatusChecker checker;
+
 
     protected override void Awake()
     {
@@ -36,36 +36,37 @@ public class MainMenuTest : Menu<MainMenu>
         quitButton.onClick.AddListener(QuitGame);
         howToPlayButton.onClick.AddListener(OpenHowToPlay);
 
-        level1Button.onClick.AddListener(() => LoadLevel("Start Timing Test"));
+        level1Button.onClick.AddListener(() => LoadLevel("JingleBells"));
         level2Button.onClick.AddListener(() => LoadLevel("CarelessWhisper"));
         level3Button.onClick.AddListener(() => LoadLevel("MiiChannel"));
     }
 
     private void StartDictationTest()
     {
-        dictationTest = new DictationRecognizer();
-        dictationTest.DictationError += (string error, int hresult) => { OnDictationError(); };
+        checker = new DictationStatusChecker();
+        checker.Initialize();
 
-        isDictationEnabled = true;
-        dictationTest.Start();
-
-        Invoke(nameof(OpenLevelSelectAfterTest), 0.3f);
+        Invoke(nameof(CheckDictationStatus), 1.0f);
     }
 
-    private void OnDictationError()
+    private void CheckDictationStatus()
     {
-        isDictationEnabled = false;
-        DictationRequestMenu.Instance.Open();
+        bool success = checker.WasSuccessful;
+
+        checker.Destroy();
+        checker = null;
+
+        if (!success)
+        {
+            DictationRequestMenu.Instance.Open();
+            return;
+        }
+
+        Invoke(nameof(OpenLevelSelectAfterTest), 1.0f);
     }
 
     private void OpenLevelSelectAfterTest()
     {
-        if (!isDictationEnabled)
-            return;
-
-        dictationTest.Stop();
-        dictationTest.Dispose();
-
         levelSelectPanel.SetActive(true);
         howToPlayPanel.SetActive(false);
     }
