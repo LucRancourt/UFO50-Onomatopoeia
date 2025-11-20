@@ -72,7 +72,10 @@ public class NoteSpawner : MonoBehaviour
     private void HitNote(Note note)
     {
         LaneFeedbackManager.Instance.FlashCorrect(note.LaneIndex);
+
         note.GetComponent<NoteVisuals>().ShowScorePopup();
+
+        ScoreManager.Instance.AddHit();
         DestroyNote(note);
     }
 
@@ -84,6 +87,7 @@ public class NoteSpawner : MonoBehaviour
 
     public void MissedNote(Note note)
     {
+        ScoreManager.Instance.AddMiss();
         DestroyNote(note);
     }
 
