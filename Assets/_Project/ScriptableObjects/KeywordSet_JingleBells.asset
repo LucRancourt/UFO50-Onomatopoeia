@@ -27,6 +27,7 @@ MonoBehaviour:
     - Sing
     - Zinc
     - Collapsing
+    - Clapping
   - Onomatopoeia: Clap
     Words:
     - Clap
@@ -40,6 +41,7 @@ MonoBehaviour:
     - Black
     - Kleptic
     - Collapsing
+    - Clapping
   - Onomatopoeia: Tick
     Words:
     - Tick
