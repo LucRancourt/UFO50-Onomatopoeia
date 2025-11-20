@@ -1163,8 +1163,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -125.00001}
-  m_SizeDelta: {x: 1650, y: 20}
+  m_AnchoredPosition: {x: 0, y: -87}
+  m_SizeDelta: {x: 1650, y: 23}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &550567227
 MonoBehaviour:
@@ -2143,7 +2143,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TempoMultiplier: 0.75
-  BackgroundMusic: {fileID: 11400000, guid: dd28905312a5d1e438d27145a46ce848, type: 2}
   _songEndTimeBuffer: 2
   _resultsPage: {fileID: 917777925}
 --- !u!114 &1161536287
@@ -2533,7 +2532,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -375}
-  m_SizeDelta: {x: 1650, y: 20}
+  m_SizeDelta: {x: 1650, y: 23}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1562883650
 MonoBehaviour:
@@ -2980,8 +2979,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -250}
-  m_SizeDelta: {x: 1650, y: 270}
+  m_AnchoredPosition: {x: 0, y: -231}
+  m_SizeDelta: {x: 1650, y: 310}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1732153955
 MonoBehaviour:
