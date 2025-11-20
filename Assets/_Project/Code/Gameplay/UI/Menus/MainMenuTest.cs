@@ -22,8 +22,7 @@ public class MainMenuTest : Menu<MainMenu>
     [SerializeField] private Button level3Button;
 
     private DictationStatusChecker checker;
-
-
+    
     protected override void Awake()
     {
         base.Awake();

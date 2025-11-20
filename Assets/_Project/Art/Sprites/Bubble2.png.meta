@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: b4860fbd379ab5e4e8e38fa1d83ed8ab
+guid: 15034c101f7bdbe44948cb9cb5518eee
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1007733541418542897
-    second: Bubble7_0
+      213: 8773148034285304506
+    second: Bubble3_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -100,12 +100,12 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bubble7_0
+      name: Bubble3_0
       rect:
         serializedVersion: 2
-        x: 9
-        y: 1
-        width: 297
+        x: 1
+        y: 2
+        width: 313
         height: 109
       alignment: 0
       pivot: {x: 0, y: 0}
@@ -115,8 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 137af7411503cfd00800000000000000
-      internalID: 1007733541418542897
+      spriteID: abafd71b7ab70c970800000000000000
+      internalID: 8773148034285304506
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Bubble7_0: 1007733541418542897
+      Bubble3_0: 8773148034285304506
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

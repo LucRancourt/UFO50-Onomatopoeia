@@ -2110,6 +2110,11 @@ MonoBehaviour:
   - Pow
   - Clap
   - Tiss
+  laneBubbleSprites:
+  - {fileID: 21300000, guid: 0bb446cd0eb76b14a8d8bccf397e096d, type: 3}
+  - {fileID: 21300000, guid: 0f36921ce27751e42b199df56e958196, type: 3}
+  - {fileID: 21300000, guid: 4cf705aa161e80744b4e82c639a94f00, type: 3}
+  - {fileID: 21300000, guid: b4860fbd379ab5e4e8e38fa1d83ed8ab, type: 3}
   spawnInterval: 5
   moveSpeed: 150
   hitZoneTop: {fileID: 550567226}

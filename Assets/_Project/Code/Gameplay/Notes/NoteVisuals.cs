@@ -6,12 +6,11 @@ public class NoteVisuals : MonoBehaviour
 {
     [SerializeField] Image bubbleImage;
     [SerializeField] TMP_Text keywordText;
-    [SerializeField] Sprite[] bubbleSprites;
     [SerializeField] GameObject scorePopupPrefab;
 
-    public void Init(string keyword)
+    public void Init(string keyword, Sprite bubbleSprite)
     {
-        bubbleImage.sprite = bubbleSprites[Random.Range(0, bubbleSprites.Length)];
+        bubbleImage.sprite = bubbleSprite;
         keywordText.text = keyword;
     }
 

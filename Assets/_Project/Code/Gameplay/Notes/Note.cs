@@ -7,11 +7,11 @@ public class Note : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] RectTransform hitZoneTop;
     [SerializeField] RectTransform hitZoneBottom;
-    private NoteSpawner _spawner;
-    
 
+    private NoteSpawner _spawner;
     RectTransform _rt;
     bool _canHit;
+
     public bool CanHit => _canHit;
     public string Keyword => keyword;
     public int LaneIndex => laneIndex;
@@ -43,7 +43,7 @@ public class Note : MonoBehaviour
         hitZoneTop = (RectTransform)data.HitTop;
         hitZoneBottom = (RectTransform)data.HitBottom;
         _spawner = data.Spawner;
-        
-        GetComponent<NoteVisuals>().Init(keyword);
+
+        GetComponent<NoteVisuals>().Init(keyword, data.BubbleSprite);
     }
 }
