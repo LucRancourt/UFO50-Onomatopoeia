@@ -1203,7 +1203,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -87}
-  m_SizeDelta: {x: 1650, y: 23}
+  m_SizeDelta: {x: 1935, y: 23}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &550567227
 MonoBehaviour:
@@ -1814,7 +1814,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 375}
-  m_SizeDelta: {x: 1650, y: 20}
+  m_SizeDelta: {x: 1935, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &880339173
 MonoBehaviour:
@@ -2868,7 +2868,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -375}
-  m_SizeDelta: {x: 1650, y: 23}
+  m_SizeDelta: {x: 1935, y: 23}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1562883650
 MonoBehaviour:
@@ -3316,7 +3316,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: -231}
-  m_SizeDelta: {x: 1650, y: 310}
+  m_SizeDelta: {x: 1935, y: 310}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1732153955
 MonoBehaviour:
@@ -3520,7 +3520,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 480a20e0345fca246ae760c93620e8f1, type: 3}
+  m_Resource: {fileID: 8300000, guid: ab220adc89db1824bb23ffd354392ad8, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
