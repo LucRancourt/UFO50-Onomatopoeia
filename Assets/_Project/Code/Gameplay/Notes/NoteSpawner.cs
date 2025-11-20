@@ -1,11 +1,10 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class NoteSpawner : MonoBehaviour
 {
     [SerializeField] GameObject notePrefab;
     [SerializeField] RectTransform[] lanePositions;
-    [SerializeField] List<string> laneKeywords;
+    [SerializeField] KeywordSet laneKeywords;
     [SerializeField] Sprite[] laneBubbleSprites;
     [SerializeField] float spawnInterval;
     [SerializeField] float moveSpeed;
@@ -58,7 +57,7 @@ public class NoteSpawner : MonoBehaviour
         note.Setup(new NoteSetupData
         {
             LaneIndex = lane,
-            Keyword = laneKeywords[lane],
+            Keyword = laneKeywords.GetOnomatopoeia(lane),
             Speed = moveSpeed,
             HitTop = hitZoneTop,
             HitBottom = hitZoneBottom,
@@ -81,7 +80,10 @@ public class NoteSpawner : MonoBehaviour
 
     private void FalseHit(string word)
     {
-        int index = laneKeywords.FindIndex(x => x.Contains(word, System.StringComparison.OrdinalIgnoreCase));
+        int index = laneKeywords.GetIndex(word);
+
+        if (index == -1) return;
+
         LaneFeedbackManager.Instance.FlashWrong(index);
     }
 

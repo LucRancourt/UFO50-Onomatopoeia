@@ -18,33 +18,19 @@ public class DictationStatusChecker
         dictationRecognizer.DictationError += OnDictationError;
         dictationRecognizer.DictationComplete += OnDictationComplete;
 
-        try
-        {
-            dictationRecognizer.Start();
-            Debug.Log("Attempting to start dictation... (If successful, dictation is enabled)");
-        }
-        catch (System.Exception e)
-        {
-            Debug.Log($"Start failed immediately: {e.Message}");
-        }
+        dictationRecognizer.Start();
     }
 
     private void OnDictationError(string error, int hresult)
     {
         if (hresult == SPERR_SPEECH_PRIVACY_POLICY_NOT_ACCEPTED)
         {
-            Debug.Log("Dictation is disabled in Windows Privacy Settings.");
-            Debug.LogErrorFormat("Dictation error: {0}; HResult = {1}. User needs to enable dictation in Settings > Privacy > Speech.", error, hresult);
-            // You can stop the recognizer here as it won't work
             if (dictationRecognizer.Status == SpeechSystemStatus.Running)
-            {
                 dictationRecognizer.Stop();
-            }
         }
         else
         {
-            Debug.Log($"Other dictation error: {error}");
-            Debug.LogErrorFormat("Dictation error: {0}; HResult = {1}.", error, hresult);
+            Application.Quit();
         }
 
         WasSuccessful = false;
@@ -52,19 +38,10 @@ public class DictationStatusChecker
 
     private void OnDictationComplete(DictationCompletionCause cause)
     {
-        if (cause == DictationCompletionCause.Complete)
+        if (cause == DictationCompletionCause.UnknownError)
         {
-            // The recognizer started and stopped normally, indicating settings are likely okay.
-            // Note: This does not mean the user is actively using Win+H dictation at that moment.
-            Debug.Log("Dictation session completed normally, settings are fine.");
-        }
-        else if (cause == DictationCompletionCause.UnknownError)
-        {
-            // This might happen if the app closed unexpectedly or had another issue
-            Debug.Log("Dictation session was incomplete.");
             WasSuccessful = false;
         }
-        // Other causes like PauseLimitExceeded, Timeout, etc.
     }
 
     public void Destroy()

@@ -8,7 +8,7 @@ public class KeywordGameplayListener : IDisposable
 {
     private DictationRecognizer _dictationRecognizer;
 
-    private List<string> _possibleNotes;
+    private KeywordSet _possibleNotes;
     private List<Note> _upcomingNotes = new List<Note>();
 
     public event Action<Note> OnNoteHit;
@@ -19,7 +19,7 @@ public class KeywordGameplayListener : IDisposable
         UnityEngine.Debug.Log(_dictationRecognizer.Status);
     }
 
-    public KeywordGameplayListener(List<string> notes)
+    public KeywordGameplayListener(KeywordSet notes)
     { 
         _possibleNotes = notes;
 
@@ -40,14 +40,19 @@ public class KeywordGameplayListener : IDisposable
         string word = GetLastWord(hypoText);
         UnityEngine.Debug.Log(word);
 
-        if (IsWordInList(_possibleNotes, word))
+        string onomatopoeia = _possibleNotes.GetOnomatopoeia(word);
+        UnityEngine.Debug.Log("Ono " + onomatopoeia);
+        if (onomatopoeia != null)
         {
-            Note noteFound = _upcomingNotes.Find(x => x.Keyword.Contains(word, StringComparison.OrdinalIgnoreCase));
+            UnityEngine.Debug.Log("Yoooooo");
+            Note noteFound = _upcomingNotes.Find(x => x.Keyword.Contains(onomatopoeia, StringComparison.OrdinalIgnoreCase));
 
             if (noteFound != null)
             {
+                UnityEngine.Debug.Log("wwwww");
                 if (!noteFound.CanHit) return;
 
+                UnityEngine.Debug.Log("aaaaaaaaaa");
                 OnNoteHit?.Invoke(noteFound);
             }
             else
