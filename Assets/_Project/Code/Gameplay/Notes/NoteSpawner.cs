@@ -78,18 +78,25 @@ public class NoteSpawner : MonoBehaviour
         
         note.GetComponent<NoteVisuals>().ShowScorePopup();
 
-        MissedNote(note);
+        ScoreManager.Instance.AddHit();
+        DestroyNote(note);
+    }
+
+    public void MissedNote(Note note)
+    {
+        ScoreManager.Instance.AddMiss();
+        DestroyNote(note);
+    }
+
+    private void DestroyNote(Note note)
+    {
+        _keywordListener.RemoveNote(note);
+        Destroy(note.gameObject);
     }
 
     private void FalseHit(string word)
     {
         LaneFeedbackManager.Instance.FlashWrong(laneKeywords.FindIndex(x => x.Contains(word, System.StringComparison.OrdinalIgnoreCase)));
-    }
-
-    public void MissedNote(Note note)
-    {
-        _keywordListener.RemoveNote(note);
-        Destroy(note.gameObject);
     }
 
     public float GetDelayToTopBar()     //calculates the time it will take for spawned notes to reach the top bar

@@ -41,14 +41,20 @@ public class AudioManager : Singleton<AudioManager>
     #endregion
 
     #region Plays
-        private void PlayMusic(AudioCue music)
+        private void PlayMusic(AudioCue music, bool isLooped = true)
         {
-            _musicSource = gameObject.AddComponent<AudioSource>();
-            _musicSource.outputAudioMixerGroup = musicMixer;
-
+            if (_musicSource == null)
+            {
+                _musicSource = gameObject.AddComponent<AudioSource>();
+                _musicSource.outputAudioMixerGroup = musicMixer;
+            }
+ 
+            if (_musicSource.isPlaying) { _musicSource.Stop(); }
+ 
+            if (isLooped) { _musicSource.loop = true; } else { _musicSource.loop = false; }
+ 
             SetupSource(ref _musicSource, music);
-
-            _musicSource.loop = true;
+ 
             _musicSource.Play();
         }
 
