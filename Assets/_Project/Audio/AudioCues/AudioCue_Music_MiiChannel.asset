@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d04cd7c5421f7645a9ea525ff7c2e2f, type: 3}
-  m_Name: AudioCue_Music_JingleBells
+  m_Name: AudioCue_Music_MiiChannel
   m_EditorClassIdentifier: 
-  <Clip>k__BackingField: {fileID: 8300000, guid: ab220adc89db1824bb23ffd354392ad8, type: 3}
+  <Clip>k__BackingField: {fileID: 8300000, guid: 7dd5f2b6b158528488d55761a475b32a, type: 3}
   <Loop>k__BackingField: 0
-  <Volume>k__BackingField: 0.949
+  <Volume>k__BackingField: 1
   <Pitch>k__BackingField: 0.75

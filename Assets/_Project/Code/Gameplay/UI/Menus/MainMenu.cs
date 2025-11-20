@@ -2,18 +2,30 @@ using UnityEngine;
 using UnityEngine.UI;
 
 using _Project.Code.Core.ServiceLocator;
+using _Project.Code.Core.Audio;
 
 public class MainMenu : Menu<MainMenu>
 {
-    // Variables
-    [Header("Buttons")]
+    [Header("Main Menu Buttons")]
     [SerializeField] private Button playButton;
     [SerializeField] private Button settingsButton;
     [SerializeField] private Button quitButton;
+    [SerializeField] private Button howToPlayButton;
+
+    [Header("Panels")]
+    [SerializeField] private GameObject levelSelectPanel;
+    [SerializeField] private GameObject howToPlayPanel;
+
+    [Header("Level Select Buttons")]
+    [SerializeField] private Button level1Button;
+    [SerializeField] private Button level2Button;
+    [SerializeField] private Button level3Button;
+
+    [Header("Music")]
+    [SerializeField] private AudioCue _menuMusic;
 
     private DictationStatusChecker checker;
-
-    // Functions
+    
     protected override void Awake()
     {
         base.Awake();
@@ -21,20 +33,34 @@ public class MainMenu : Menu<MainMenu>
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;
 
-        playButton.onClick.AddListener(StartGame);
+        playButton.onClick.AddListener(StartDictationTest);
         settingsButton.onClick.AddListener(OpenSettings);
         quitButton.onClick.AddListener(QuitGame);
+        howToPlayButton.onClick.AddListener(ToggleHowToPlay);
+
+        level1Button.onClick.AddListener(() => LoadLevel("JingleBells"));
+        level2Button.onClick.AddListener(() => LoadLevel("CarelessWhisper"));
+        level3Button.onClick.AddListener(() => LoadLevel("MiiChannel"));
     }
 
-    private void StartGame()
+    private void OnEnable()
+    {
+        AudioManager.Instance.PlayMusic(_menuMusic, true);
+    }
+    private void OnDisable()
+    {
+        AudioManager.Instance.StopMusic();
+    }
+
+    private void StartDictationTest()
     {
         checker = new DictationStatusChecker();
         checker.Initialize();
 
-        Invoke(nameof(Check), 1.0f);
+        Invoke(nameof(CheckDictationStatus), 1.0f);
     }
 
-    private void Check()
+    private void CheckDictationStatus()
     {
         bool success = checker.WasSuccessful;
 
@@ -47,12 +73,28 @@ public class MainMenu : Menu<MainMenu>
             return;
         }
 
-        Invoke(nameof(OpenLevelSelect), 1.0f);
+        Invoke(nameof(OpenLevelSelectAfterTest), 1.0f);
     }
 
-    private void OpenLevelSelect()
+    private void OpenLevelSelectAfterTest()
     {
-        ServiceLocator.Get<SceneService>().LoadScene("Start Timing Test");
+        levelSelectPanel.SetActive(true);
+        howToPlayPanel.SetActive(false);
+    }
+
+    private void ToggleHowToPlay()
+    {
+        levelSelectPanel.SetActive(false);
+
+        if (howToPlayPanel.activeSelf)
+            howToPlayPanel.SetActive(false);
+        else
+            howToPlayPanel.SetActive(true);
+    }
+
+    private void LoadLevel(string sceneName)
+    {
+        ServiceLocator.Get<SceneService>().LoadScene(sceneName);
     }
 
     private void OpenSettings()

@@ -36,21 +36,17 @@ public class KeywordGameplayListener : IDisposable
         UnityEngine.Debug.Log(word);
 
         List<string> onomatopoeias = _possibleNotes.GetOnomatopoeiaList(word);
-        UnityEngine.Debug.Log(onomatopoeias.Count);
 
         foreach(string ono in onomatopoeias)
         {
             if (ono != null)
             {
-                UnityEngine.Debug.Log("Yoooooo");
                 Note noteFound = _upcomingNotes.Find(x => x.Keyword.Contains(ono, StringComparison.OrdinalIgnoreCase));
 
                 if (noteFound != null)
                 {
-                    UnityEngine.Debug.Log("wwwww");
                     if (!noteFound.CanHit) continue;
 
-                    UnityEngine.Debug.Log("aaaaaaaaaa");
                     OnNoteHit?.Invoke(noteFound);
                 }
                 else
@@ -71,11 +67,6 @@ public class KeywordGameplayListener : IDisposable
 
     public void AddNextNote(Note newNote) { _upcomingNotes.Add(newNote); }
     public void RemoveNote(Note noteToRemove) { _upcomingNotes.Remove(noteToRemove); }
-
-    private bool IsWordInList(List<string> list, string word)
-    {
-        return list.Find(x => x.Contains(word, StringComparison.OrdinalIgnoreCase)) != null;
-    }
 
     private string GetLastWord(string inputString)
     {

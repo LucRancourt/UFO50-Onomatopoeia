@@ -37,30 +37,6 @@ public class PauseMenu : Menu<PauseMenu>
         EventBus.Instance.Subscribe<PauseInputEvent>(this, OnPauseInputEvent);
     }
 
-    private void OnEnable()
-    {
-        SceneManager.sceneLoaded += OnSceneLoaded;
-    }
-
-    private void OnDisable()
-    {
-        SceneManager.sceneLoaded -= OnSceneLoaded;
-    }
-
-    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-    {
-        _musicSource = FindMusicSource();
-    }
-
-    private AudioSource FindMusicSource()
-    {
-        StartMusic sm = FindFirstObjectByType<StartMusic>();
-        if (sm != null)
-            return sm.audioSource;
-
-        return null;
-    }
-
     private void OnPauseInputEvent(PauseInputEvent evt)
     {
         if (Time.timeScale == 0.0f)
@@ -73,8 +49,8 @@ public class PauseMenu : Menu<PauseMenu>
     {
         Time.timeScale = 0.0f;
 
-        if (_musicSource != null)
-            _musicSource.Pause();
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.TogglePauseMusic();
 
         pauseMenu.SetActive(true);
     }
@@ -90,8 +66,8 @@ public class PauseMenu : Menu<PauseMenu>
 
         Time.timeScale = 1.0f;
 
-        if (_musicSource != null)
-            _musicSource.UnPause();
+        if (AudioManager.Instance != null)
+            AudioManager.Instance.TogglePauseMusic();
     }
 
     private void OpenSettingsMenu()

@@ -1,3 +1,4 @@
+using _Project.Code.Core.Audio;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine;
 public class StartMusic : MonoBehaviour
 {
     public AudioSource audioSource;
+    public AudioCue audioCue;
     public float AudioDelayBuffer = 0f;
     [SerializeField] GameObject _timerCanvas;
 
@@ -14,9 +16,10 @@ public class StartMusic : MonoBehaviour
     public void StartSong()
     {
         Debug.Log("START BUTTON PRESSED");
-        audioSource.pitch = SongManager.Instance.TempoMultiplier;
+        //audioSource.pitch = SongManager.Instance.TempoMultiplier;
+        audioCue.Pitch = SongManager.Instance.TempoMultiplier;
         //SongManager.Instance.BackgroundMusic.SetPitch(SongManager.Instance.TempoMultiplier);
-        
+
         float totalAudioDelay = FindFirstObjectByType<NoteSpawner>().GetDelayToTopBar() + AudioDelayBuffer;
         StartCoroutine(DelayedStart(totalAudioDelay));
     }
@@ -39,7 +42,8 @@ public class StartMusic : MonoBehaviour
         
         yield return new WaitForSeconds(audioDelay);            //Play the audio once the notes reach the top bar
         _timerCanvas.SetActive(false);
-        audioSource.Play();
+        AudioManager.Instance.PlayMusic(audioCue, false);
+        //audioSource.Play();
         //AudioManager.Instance.PlayMusic(SongManager.Instance.BackgroundMusic, false);
     }
 

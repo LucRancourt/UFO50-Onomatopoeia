@@ -2168,6 +2168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 1776816597}
+  audioCue: {fileID: 11400000, guid: 61929edd455c9f24cb87b9551e3eb652, type: 2}
   AudioDelayBuffer: 0
   _timerCanvas: {fileID: 1538960601}
 --- !u!114 &1161536285
