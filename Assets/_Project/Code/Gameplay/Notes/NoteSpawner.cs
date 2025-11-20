@@ -6,6 +6,7 @@ public class NoteSpawner : MonoBehaviour
     [SerializeField] GameObject notePrefab;
     [SerializeField] RectTransform[] lanePositions;
     [SerializeField] List<string> laneKeywords;
+    [SerializeField] Sprite[] laneBubbleSprites;
     [SerializeField] float spawnInterval;
     [SerializeField] float moveSpeed;
     [SerializeField] RectTransform hitZoneTop;
@@ -13,26 +14,22 @@ public class NoteSpawner : MonoBehaviour
     [SerializeField] RectTransform canvasTransform;
     [SerializeField] float spawnY;
     [SerializeField] bool useMidi;
-    private KeywordGameplayListener _keywordListener;
 
+    private KeywordGameplayListener _keywordListener;
     float _t;
 
-
-    private void Start()
+    void Start()
     {
         _keywordListener = new KeywordGameplayListener(laneKeywords);
-
         _keywordListener.OnNoteHit += HitNote;
         _keywordListener.OnFalseHit += FalseHit;
     }
 
-    private void OnDestroy()
+    void OnDestroy()
     {
         _keywordListener.OnNoteHit -= HitNote;
         _keywordListener.OnFalseHit -= FalseHit;
-
         _keywordListener.Dispose();
-
         _keywordListener = null;
     }
 
@@ -54,37 +51,39 @@ public class NoteSpawner : MonoBehaviour
         GameObject obj = Instantiate(notePrefab, canvasTransform);
         RectTransform rt = obj.GetComponent<RectTransform>();
 
-        rt.anchoredPosition = new Vector2(
-            lanePositions[lane].anchoredPosition.x,
-            spawnY
-        );
+        rt.anchoredPosition = new Vector2(lanePositions[lane].anchoredPosition.x, spawnY);
 
-        obj.GetComponent<Note>().Setup(new NoteSetupData
+        var note = obj.GetComponent<Note>();
+
+        note.Setup(new NoteSetupData
         {
             LaneIndex = lane,
             Keyword = laneKeywords[lane],
             Speed = moveSpeed,
             HitTop = hitZoneTop,
             HitBottom = hitZoneBottom,
-            Spawner = this
+            Spawner = this,
+            BubbleSprite = laneBubbleSprites[lane]
         });
 
-        _keywordListener.AddNextNote(obj.GetComponent<Note>());
+        _keywordListener.AddNextNote(note);
     }
 
     private void HitNote(Note note)
     {
         LaneFeedbackManager.Instance.FlashCorrect(note.LaneIndex);
-        
         note.GetComponent<NoteVisuals>().ShowScorePopup();
-
-        ScoreManager.Instance.AddHit();
         DestroyNote(note);
+    }
+
+    private void FalseHit(string word)
+    {
+        int index = laneKeywords.FindIndex(x => x.Contains(word, System.StringComparison.OrdinalIgnoreCase));
+        LaneFeedbackManager.Instance.FlashWrong(index);
     }
 
     public void MissedNote(Note note)
     {
-        ScoreManager.Instance.AddMiss();
         DestroyNote(note);
     }
 
@@ -94,12 +93,7 @@ public class NoteSpawner : MonoBehaviour
         Destroy(note.gameObject);
     }
 
-    private void FalseHit(string word)
-    {
-        LaneFeedbackManager.Instance.FlashWrong(laneKeywords.FindIndex(x => x.Contains(word, System.StringComparison.OrdinalIgnoreCase)));
-    }
-
-    public float GetDelayToTopBar()     //calculates the time it will take for spawned notes to reach the top bar
+    public float GetDelayToTopBar()
     {
         float distance = Mathf.Abs(spawnY - hitZoneTop.anchoredPosition.y);
         return distance / moveSpeed;

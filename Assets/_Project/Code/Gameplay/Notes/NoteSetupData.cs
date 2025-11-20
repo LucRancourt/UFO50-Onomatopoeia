@@ -6,4 +6,5 @@ public struct NoteSetupData
     public UnityEngine.Transform HitTop;
     public UnityEngine.Transform HitBottom;
     public NoteSpawner Spawner;
+    public UnityEngine.Sprite BubbleSprite;
 }

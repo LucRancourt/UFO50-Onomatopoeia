@@ -25,8 +25,7 @@ public class MainMenuTest : Menu<MainMenu>
     [SerializeField] private AudioCue _menuMusic;
 
     private DictationStatusChecker checker;
-
-
+    
     protected override void Awake()
     {
         base.Awake();

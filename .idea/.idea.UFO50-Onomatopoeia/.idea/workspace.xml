@@ -7,17 +7,13 @@
     <list default="true" id="1e2c24e9-d10e-44d3-a58c-1f77ef2f3a9c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.UFO50-Onomatopoeia/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.UFO50-Onomatopoeia/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Code/Gameplay/Notes/Note.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Code/Gameplay/Notes/Note.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Code/Gameplay/Notes/NoteSetupData.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Code/Gameplay/Notes/NoteSetupData.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Code/Gameplay/Notes/NoteSpawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Code/Gameplay/Notes/NoteSpawner.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Code/Gameplay/Notes/NoteVisuals.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Code/Gameplay/Notes/NoteVisuals.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Code/Gameplay/UI/Menus/MainMenuTest.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Code/Gameplay/UI/Menus/MainMenuTest.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Code/Gameplay/UI/Menus/PauseMenu.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Code/Gameplay/UI/Menus/PauseMenu.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/[SceneServiceTest].prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Prefabs/[SceneServiceTest].prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/[SceneServiceTest].prefab.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Prefabs/[SceneServiceTest].prefab.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/NoteVisuals.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Prefabs/NoteVisuals.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Project/Prefabs/Score.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Prefabs/Score.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Project/Scenes/MainMenu.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scenes/MainMenu.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scenes/Persistent.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scenes/Persistent.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scenes/Start Timing Test.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scenes/Start Timing Test.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scenes/TestScenes/GameSceneTest1.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scenes/TestScenes/GameSceneTest1.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Project/Scenes/TestScenes/PersistentTest.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Project/Scenes/TestScenes/PersistentTest.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/EditorBuildSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,19 +37,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "Visuals",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Attach to Unity Editor.Attach to Unity Editor">
     <configuration name="Start Unity" type="RunUnityExe" factoryName="Unity Executable">
       <option name="EXE_PATH" value="C:\Program Files\Unity\Hub\Editor\6000.0.58f1\Editor\Unity.exe" />
@@ -109,6 +106,12 @@
       <workItem from="1763322160675" duration="4420000" />
       <workItem from="1763510403545" duration="4659000" />
       <workItem from="1763530888593" duration="6968000" />
+      <workItem from="1763591737356" duration="236000" />
+      <workItem from="1763592028111" duration="352000" />
+      <workItem from="1763592434897" duration="8000" />
+      <workItem from="1763592468892" duration="84000" />
+      <workItem from="1763599332352" duration="47000" />
+      <workItem from="1763608453706" duration="323000" />
     </task>
     <servers />
   </component>
