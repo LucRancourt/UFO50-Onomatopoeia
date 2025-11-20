@@ -19,11 +19,13 @@ MonoBehaviour:
     - Bank
     - Bangs
     - Back
+    - Bentec
   - Onomatopoeia: Zing
     Words:
     - Zing
     - Sing
     - Zinc
+    - Collapsing
   - Onomatopoeia: Clap
     Words:
     - Clap
@@ -35,6 +37,8 @@ MonoBehaviour:
     - Flat
     - App
     - Black
+    - Kleptic
+    - Collapsing
   - Onomatopoeia: Tick
     Words:
     - Tick
@@ -46,3 +50,5 @@ MonoBehaviour:
     - Tig
     - Check
     - Text
+    - Kleptic
+    - Bentec

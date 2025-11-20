@@ -50,6 +50,23 @@ public class KeywordSet : ScriptableObject
         return null;
     }
 
+    public List<string> GetOnomatopoeiaList(string word)
+    {
+        Initialize();
+
+        List<string> onosFound = new List<string>();
+
+        string lowerCase = word.ToLower();
+
+        foreach (Set set in keywordSets)
+        {
+            if (set.matchLookup.Contains(lowerCase))
+                onosFound.Add(set.Onomatopoeia);
+        }
+
+        return onosFound;
+    }
+
     public string GetOnomatopoeia(int index)
     {
         Initialize();

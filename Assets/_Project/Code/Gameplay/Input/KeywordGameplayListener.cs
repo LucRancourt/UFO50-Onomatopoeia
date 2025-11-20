@@ -1,7 +1,6 @@
 using UnityEngine.Windows.Speech;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 
 
 public class KeywordGameplayListener : IDisposable
@@ -36,24 +35,28 @@ public class KeywordGameplayListener : IDisposable
         string word = GetLastWord(hypoText);
         UnityEngine.Debug.Log(word);
 
-        string onomatopoeia = _possibleNotes.GetOnomatopoeia(word);
-        UnityEngine.Debug.Log("Ono " + onomatopoeia);
-        if (onomatopoeia != null)
+        List<string> onomatopoeias = _possibleNotes.GetOnomatopoeiaList(word);
+        UnityEngine.Debug.Log(onomatopoeias.Count);
+
+        foreach(string ono in onomatopoeias)
         {
-            UnityEngine.Debug.Log("Yoooooo");
-            Note noteFound = _upcomingNotes.Find(x => x.Keyword.Contains(onomatopoeia, StringComparison.OrdinalIgnoreCase));
-
-            if (noteFound != null)
+            if (ono != null)
             {
-                UnityEngine.Debug.Log("wwwww");
-                if (!noteFound.CanHit) return;
+                UnityEngine.Debug.Log("Yoooooo");
+                Note noteFound = _upcomingNotes.Find(x => x.Keyword.Contains(ono, StringComparison.OrdinalIgnoreCase));
 
-                UnityEngine.Debug.Log("aaaaaaaaaa");
-                OnNoteHit?.Invoke(noteFound);
-            }
-            else
-            {
-                OnFalseHit?.Invoke(word);
+                if (noteFound != null)
+                {
+                    UnityEngine.Debug.Log("wwwww");
+                    if (!noteFound.CanHit) continue;
+
+                    UnityEngine.Debug.Log("aaaaaaaaaa");
+                    OnNoteHit?.Invoke(noteFound);
+                }
+                else
+                {
+                    OnFalseHit?.Invoke(ono);
+                }
             }
         }
     }
