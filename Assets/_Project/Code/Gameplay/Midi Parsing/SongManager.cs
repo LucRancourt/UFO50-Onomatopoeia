@@ -1,7 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Diagnostics;
+using _Project.Code.Core.Audio;
 using _Project.Code.Core.General;
 using UnityEngine;
 
@@ -9,9 +9,11 @@ public class SongManager : Singleton<SongManager>
 {
     public List<TrackData> Tracks = new List<TrackData>();
     public float TempoMultiplier = 1f;
+    //public AudioCue BackgroundMusic;
     
     [SerializeField] float _songEndTimeBuffer = 2f;
     [SerializeField] ResultsPageMenu _resultsPage;
+    
     private int _finishedTracks;
 
     public void StartSong()

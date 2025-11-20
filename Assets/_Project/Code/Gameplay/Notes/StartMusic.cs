@@ -15,6 +15,7 @@ public class StartMusic : MonoBehaviour
     {
         Debug.Log("START BUTTON PRESSED");
         audioSource.pitch = SongManager.Instance.TempoMultiplier;
+        //SongManager.Instance.BackgroundMusic.SetPitch(SongManager.Instance.TempoMultiplier);
         
         float totalAudioDelay = FindFirstObjectByType<NoteSpawner>().GetDelayToTopBar() + AudioDelayBuffer;
         StartCoroutine(DelayedStart(totalAudioDelay));
@@ -39,6 +40,7 @@ public class StartMusic : MonoBehaviour
         yield return new WaitForSeconds(audioDelay);            //Play the audio once the notes reach the top bar
         _timerCanvas.SetActive(false);
         audioSource.Play();
+        //AudioManager.Instance.PlayMusic(SongManager.Instance.BackgroundMusic, false);
     }
 
     private IEnumerator StartCountdownTimer(float totalDelay)

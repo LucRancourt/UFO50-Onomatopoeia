@@ -1,8 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Windows.Speech;
 
 using _Project.Code.Core.ServiceLocator;
+using _Project.Code.Core.Audio;
 
 public class MainMenuTest : Menu<MainMenu>
 {
@@ -20,6 +20,9 @@ public class MainMenuTest : Menu<MainMenu>
     [SerializeField] private Button level1Button;
     [SerializeField] private Button level2Button;
     [SerializeField] private Button level3Button;
+
+    [Header("Music")]
+    [SerializeField] private AudioCue _menuMusic;
 
     private DictationStatusChecker checker;
 
@@ -39,6 +42,15 @@ public class MainMenuTest : Menu<MainMenu>
         level1Button.onClick.AddListener(() => LoadLevel("JingleBells"));
         level2Button.onClick.AddListener(() => LoadLevel("CarelessWhisper"));
         level3Button.onClick.AddListener(() => LoadLevel("MiiChannel"));
+    }
+
+    private void OnEnable()
+    {
+        AudioManager.Instance.PlayMusic(_menuMusic, true);
+    }
+    private void OnDisable()
+    {
+        AudioManager.Instance.StopMusic();
     }
 
     private void StartDictationTest()

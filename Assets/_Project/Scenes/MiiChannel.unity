@@ -1701,7 +1701,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f8c706b2883544439ccf69deed22b04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TempoMultiplier: 0.95
+  TempoMultiplier: 0.85
   _songEndTimeBuffer: 2
   _resultsPage: {fileID: 1450131019}
 --- !u!114 &1161536287

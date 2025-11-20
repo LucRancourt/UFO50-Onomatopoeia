@@ -23,7 +23,7 @@ public class AudioManager : Singleton<AudioManager>
     private void Start()
     {
         LoadVolume();
-        PlayMusic(defaultMusic);
+        //PlayMusic(defaultMusic);
     }
 
     #region Volume
@@ -41,7 +41,7 @@ public class AudioManager : Singleton<AudioManager>
     #endregion
 
     #region Plays
-        private void PlayMusic(AudioCue music, bool isLooped = true)
+        public void PlayMusic(AudioCue music, bool isLooped = true)
         {
             if (_musicSource == null)
             {
@@ -70,6 +70,12 @@ public class AudioManager : Singleton<AudioManager>
         public void PlayRandomSound(List<AudioCue> listOfSFX)
         {
             PlaySound(listOfSFX[Random.Range(0, listOfSFX.Count - 1)]);
+        }
+
+        public void StopMusic()
+        {
+            if (_musicSource != null)
+                _musicSource.Stop();
         }
     #endregion
 
