@@ -14,10 +14,6 @@ public class KeywordGameplayListener : IDisposable
     public event Action<Note> OnNoteHit;
     public event Action<string> OnFalseHit;
 
-    public void Update()
-    {
-        UnityEngine.Debug.Log(_dictationRecognizer.Status);
-    }
 
     public KeywordGameplayListener(KeywordSet notes)
     { 

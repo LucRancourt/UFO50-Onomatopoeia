@@ -2106,11 +2106,7 @@ MonoBehaviour:
   - {fileID: 267022246}
   - {fileID: 1872708001}
   - {fileID: 475241786}
-  laneKeywords:
-  - Bang
-  - Pow
-  - Clap
-  - Tiss
+  laneKeywords: {fileID: 11400000, guid: eebf433da5d398049a8972bfe7a0ff0d, type: 2}
   laneBubbleSprites:
   - {fileID: 21300000, guid: 0bb446cd0eb76b14a8d8bccf397e096d, type: 3}
   - {fileID: 21300000, guid: 363d63601b2dba04aa70e8cacded3628, type: 3}
@@ -2939,7 +2935,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1629150845
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3664,7 +3660,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1927110869
 RectTransform:
   m_ObjectHideFlags: 0

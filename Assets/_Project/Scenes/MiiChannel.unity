@@ -1439,7 +1439,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &925585189
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1763,11 +1763,7 @@ MonoBehaviour:
   - {fileID: 267022246}
   - {fileID: 1872708001}
   - {fileID: 475241786}
-  laneKeywords:
-  - Bang
-  - Zing
-  - Clap
-  - Tick
+  laneKeywords: {fileID: 11400000, guid: eebf433da5d398049a8972bfe7a0ff0d, type: 2}
   laneBubbleSprites:
   - {fileID: 21300000, guid: 15034c101f7bdbe44948cb9cb5518eee, type: 3}
   - {fileID: 21300000, guid: 0bb446cd0eb76b14a8d8bccf397e096d, type: 3}
@@ -2461,7 +2457,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1450131019
 MonoBehaviour:
   m_ObjectHideFlags: 0
