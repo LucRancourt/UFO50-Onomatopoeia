@@ -26,7 +26,8 @@ public class SceneService : MonoBehaviourService
 
     public void LoadScene(string sceneName)
     {
-        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
+        if (SceneManager.GetActiveScene() != SceneManager.GetSceneByBuildIndex(0))
+            SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
 
         SceneManager.LoadScene(sceneName, LoadSceneMode.Additive);
     }
