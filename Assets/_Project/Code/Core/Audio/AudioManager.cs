@@ -51,9 +51,9 @@ public class AudioManager : Singleton<AudioManager>
  
             if (_musicSource.isPlaying) { _musicSource.Stop(); }
  
-            if (isLooped) { _musicSource.loop = true; } else { _musicSource.loop = false; }
- 
             SetupSource(ref _musicSource, music);
+
+            if (isLooped) { _musicSource.loop = true; } else { _musicSource.loop = false; }
  
             _musicSource.Play();
         }
