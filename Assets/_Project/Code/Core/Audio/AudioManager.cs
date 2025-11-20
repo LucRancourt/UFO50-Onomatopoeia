@@ -79,6 +79,14 @@ public class AudioManager : Singleton<AudioManager>
         }
     #endregion
 
+    public void TogglePauseMusic()
+    {
+        if (_musicSource == null) return;
+
+        if (_musicSource.isPlaying) { _musicSource.Pause(); }
+        else { _musicSource.Play(); }
+    }
+
     private void SetupSource(ref AudioSource source, AudioCue sfx)
     {
         source.clip = sfx.Clip;
